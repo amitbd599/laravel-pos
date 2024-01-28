@@ -51,7 +51,7 @@ class UserController extends Controller
                     "status" => "Success",
                     "message" => "Authorized",
                     "token" => $token
-                ]);
+                ])->cookie('token',$token,time()+60*24*30);
 
             } else {
                 return response()->json([
@@ -134,8 +134,9 @@ class UserController extends Controller
 
     function ResetPassword(Request $request)
     {
+      
         try {
-            $email = $request->headers()->get('email');
+            $email = $request->header('email');
             $password = $request->input("password");
             User::where("email", "=", $email)->update(["password" => $password]);
             return response()->json([
