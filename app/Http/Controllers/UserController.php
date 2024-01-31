@@ -51,7 +51,7 @@ class UserController extends Controller
                     "status" => "Success",
                     "message" => "Authorized",
                     "token" => $token
-                ])->cookie('token',$token,time()+60*24*30);
+                ])->cookie('token', $token, time() + 60 * 24 * 30);
 
             } else {
                 return response()->json([
@@ -122,8 +122,8 @@ class UserController extends Controller
             return response()->json([
                 "status" => "Success",
                 "message" => "OTP verification successfully",
-                "token" => $token
-            ]);
+
+            ])->cookie('token', $token, 60 * 24 * 30);
         } else {
             return response()->json([
                 "status" => "Fail",
@@ -134,7 +134,7 @@ class UserController extends Controller
 
     function ResetPassword(Request $request)
     {
-      
+
         try {
             $email = $request->header('email');
             $password = $request->input("password");
@@ -142,7 +142,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => "Success",
                 "message" => "Password reset successfully",
-            
+
             ]);
         } catch (Exception $e) {
             return response()->json([

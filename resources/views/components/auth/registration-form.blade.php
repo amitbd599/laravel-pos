@@ -40,51 +40,43 @@
     </div>
 </div>
 
+
 <script>
+                async function onRegistration() {
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                var firstName = document.getElementById('firstName').value;
+                var lastName = document.getElementById('lastName').value;
+                var mobile = document.getElementById('mobile').value;
+                var password = document.getElementById('password').value;
 
-
-  async function onRegistration() {
-
-        let email = document.getElementById('email').value;
-        let firstName = document.getElementById('firstName').value;
-        let lastName = document.getElementById('lastName').value;
-        let mobile = document.getElementById('mobile').value;
-        let password = document.getElementById('password').value;
-
-        if(email.length===0){
-            errorToast('Email is required')
-        }
-        else if(firstName.length===0){
-            errorToast('First Name is required')
-        }
-        else if(lastName.length===0){
-            errorToast('Last Name is required')
-        }
-        else if(mobile.length===0){
-            errorToast('Mobile is required')
-        }
-        else if(password.length===0){
-            errorToast('Password is required')
-        }
-        else{
-            showLoader();
-            let res=await axios.post("/user-registration",{
-                email:email,
-                firstName:firstName,
-                lastName:lastName,
-                mobile:mobile,
-                password:password
-            })
+                if (email.length === 0) {
+                    errorToast("Email is required");
+                } else if (password.length === 0) {
+                    errorToast("Password is required");
+                } else if (firstName.length === 0) {
+                    errorToast("First Name is required");
+                } else if (lastName.length === 0) {
+                    errorToast("Last Name is required");
+                } else if (mobile.length === 0) {
+                    errorToast("Mobile Number is required");
+                } else if (password.length === 0) {
+                    errorToast("Password is required");
+                } else {
+                    showLoader()
+                    let res = await axios.post('/user-registration', { email, password, firstName, lastName, mobile });
             hideLoader();
-            if(res.status===200 && res.data['status']==='success'){
-                successToast(res.data['message']);
-                setTimeout(function (){
-                    window.location.href='/userLogin'
-                },2000)
+                if (res.status === 200 && res.data['status'] === 'Success') {
+                    successToast("Registration Success");
+                    setTimeout(() => {
+                        window.location.href = "/login";
+                    }, 1000);
             }
-            else{
-                errorToast(res.data['message'])
+            else {
+                errorToast(res.data['message']);
             }
+
         }
     }
 </script>
+

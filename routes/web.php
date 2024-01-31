@@ -16,14 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/user-registration', [UserController::class,'UserRegistration']);
-Route::post('/user-login', [UserController::class,'UserLogin']);
-Route::post('/send-otp-code', [UserController::class,'SendOTPCode']);
-Route::post('/verify-otp', [UserController::class,'VerifyOTP']);
-Route::post('/reset-password', [UserController::class,'ResetPassword'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('/user-registration', [UserController::class, 'UserRegistration']);
+Route::post('/user-login', [UserController::class, 'UserLogin']);
+Route::post('/send-otp-code', [UserController::class, 'SendOTPCode']);
+Route::post('/verify-otp', [UserController::class, 'VerifyOTP']);
+Route::post('/reset-password', [UserController::class, 'ResetPassword'])->middleware([TokenVerificationMiddleware::class]);
 
 
 
 // Page routes
-Route::get('/login', [PageViewController::class,'LoginPage']);
-Route::get('/registration', [PageViewController::class,'RegistrationPage']);
+Route::get('/login', [PageViewController::class, 'LoginPage']);
+Route::get('/registration', [PageViewController::class, 'RegistrationPage']);
+Route::get('/send-otp', [PageViewController::class, 'SendOTPPage']);
+Route::get('/verify-otp', [PageViewController::class, 'VerifyOTPPage']);
+Route::get('/reset-pass', [PageViewController::class, 'ResetPassPage']);
+Route::get('/dashboard', [PageViewController::class, 'DashboardPage']);
